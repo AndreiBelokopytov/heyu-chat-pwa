@@ -1,0 +1,15 @@
+@import "./variables";
+
+@mixin padding ($side: "both", $padding: 16px) {
+  @if $side == "vertical" {
+    padding: $padding 0;
+  } @else if $side == "horizontal" {
+    padding: 0 $padding;
+  } @else if $side == "both" {
+    padding: $padding;
+  }
+}
+
+@mixin background-gradient {
+  background-image: linear-gradient(to top, $color-primary 0%, $color-accent 100%);
+}

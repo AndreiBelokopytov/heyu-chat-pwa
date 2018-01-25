@@ -1,0 +1,51 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+$header-height: 265px;
+
+.profile-page__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  @include background-gradient();
+  padding: 50px 32px 16px 32px;
+}
+
+.user-profile {
+  height: 100%;
+  color: #fff;
+  text-align: center;
+}
+
+.user-profile__content{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-profile__avatar {
+  margin: 0 auto;
+  display: block;
+  width: 90px;
+  height: 90px;
+
+}
+
+.user-profile__name {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.user-profile__about {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.profile-page__content {
+  height: 100%;
+  background-color: #fff;
+}
+

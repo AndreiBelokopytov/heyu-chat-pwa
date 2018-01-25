@@ -1,0 +1,41 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+.messages-page {
+  height: 100%;
+}
+
+.messages-page__content {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.chat {
+  height: 100%;
+  background-color: #fff;
+  overflow: auto;
+  @include padding('vertical');
+}
+
+.chat__message {
+  @include padding('horizontal');
+
+  + .chat__message {
+    margin-top: 25px;
+  }
+}
+
+.messages-page__msg-field{
+  flex: 1;
+  @include padding();
+}
+
+.messages-page__btn-send {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  width: 70px;
+  @include background-gradient();
+}

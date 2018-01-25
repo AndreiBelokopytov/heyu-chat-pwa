@@ -1,0 +1,64 @@
+@import "./variables";
+@import "./mixins";
+
+.page--gradient-bg {
+  .page__background {
+    @include background-gradient();
+  }
+}
+
+ons-input {
+  display: block;
+  width: 100%;
+
+  .text-input--block {
+    display: block;
+    width: 100%;
+    height: 42px;
+    padding: 0 24px;
+    border-radius: 21px;
+    font-size: 19px;
+    text-align: center;
+  }
+  
+  .text-input--darken {
+    color: #fff;
+    background-color: rgba(#000, .3);
+    transition: all ease .2s;
+  
+    &::placeholder {
+      color: rgba(#fff, .6);
+    }
+  
+    &:focus, &:active {
+      background-color: rgba(#000, .46);
+    }
+  }
+}
+
+.button--white {
+  height: 42px;
+  padding: 0 24px;
+  border-radius: 21px;
+  background-color: #fff;
+  line-height: 42px;
+  font-size: 19px;
+  color: $color-primary;
+  font-weight: 400;
+
+  &:active {
+    background-color: #fff;
+    opacity: .84;
+  }
+}
+
+.textarea--block {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  resize: none;
+
+  &::placeholder {
+    color: $text-color-muted;
+  }
+}

@@ -1,0 +1,26 @@
+@import "./styles/mixins";
+
+.groups-page__content {
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-flex-flow: row wrap;
+  justify-content: space-between;
+  @include padding();
+}
+
+.groups-page__card {
+  max-width: 360px;
+  margin: 16px auto 0 auto;
+  flex-basis: 360px;
+}
+
+.group-members {
+  display: flex;
+  justify-content: center;
+}
+
+.group-members__avatar {
+  & + .group-members__avatar {
+    margin-left: 5px;
+  }
+}

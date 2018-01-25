@@ -1,0 +1,17 @@
+@import "../styles/variables";
+
+.user-card {
+  .user-avatar-warp {
+    margin-right: 14px;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .contact-icon {
+    font-size: 19px;
+    color: $text-color-muted;
+  }
+}
