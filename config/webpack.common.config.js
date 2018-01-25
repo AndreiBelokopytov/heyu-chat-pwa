@@ -9,7 +9,7 @@ function getConfig (production = false) {
     },
     output: {
       path: paths.DIST_FOLDER,
-      filename: '[name].[hash].js'
+      filename: '[name].js'
     },
     module: {
       rules: [
