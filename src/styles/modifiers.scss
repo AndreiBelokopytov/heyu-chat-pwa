@@ -1,9 +1,8 @@
 @import "./variables";
-@import "./mixins";
 
 .page--gradient-bg {
   .page__background {
-    @include background-gradient();
+    background-image: $gradient-primary;
   }
 }
 
@@ -14,10 +13,10 @@ ons-input {
   .text-input--block {
     display: block;
     width: 100%;
-    height: 42px;
+    height: $input-height;
     padding: 0 24px;
-    border-radius: 21px;
-    font-size: 19px;
+    border-radius: $input-border-radius;
+    font-size: $font-size-large;
     text-align: center;
   }
   
@@ -37,14 +36,14 @@ ons-input {
 }
 
 .button--white {
-  height: 42px;
+  height: $button-height;
   padding: 0 24px;
-  border-radius: 21px;
+  border-radius: $button-border-radius;
   background-color: #fff;
-  line-height: 42px;
-  font-size: 19px;
+  line-height: $button-height;
+  font-size: $font-size-large;
   color: $color-primary;
-  font-weight: 400;
+  font-weight: $font-weight-default;
 
   &:active {
     background-color: #fff;
@@ -55,7 +54,7 @@ ons-input {
 .textarea--block {
   display: block;
   width: 100%;
-  font-size: 18px;
+  font-size: $font-size-medium;
   resize: none;
 
   &::placeholder {

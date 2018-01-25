@@ -11,22 +11,19 @@
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: "Lato", "Helvetica", "Arial", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  background-color: white;
+  font-size: $font-size-default;
+  font-weight: $font-weight-default;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  line-height: $base-line-height;
+  line-height: normal;
 }
 
 p {
   margin: 0;
-  line-height: $base-line-height;
+  line-height: normal;
 }
 
 .label {
@@ -37,17 +34,3 @@ p {
   color: $color-primary !important;
 }
 
-button {
-  margin: 0;
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  
-  @media (pointer:coarse) {
-    cursor: default;
-  }
-
-  &:focus, &:active {
-    outline: none;
-  }
-}

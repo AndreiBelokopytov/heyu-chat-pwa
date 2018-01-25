@@ -1,16 +1,16 @@
-@import "./styles/mixins";
+@import "./styles/variables";
 
 .groups-page__content {
   display: flex;
   flex-wrap: wrap;
   -webkit-flex-flow: row wrap;
   justify-content: space-between;
-  @include padding();
+  padding: $base-padding;
 }
 
 .groups-page__card {
   max-width: 360px;
-  margin: 16px auto 0 auto;
+  margin: $base-padding auto 0 auto;
   flex-basis: 360px;
 }
 

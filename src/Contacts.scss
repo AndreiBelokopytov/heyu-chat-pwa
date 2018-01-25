@@ -1,3 +1,5 @@
+@import "./styles/variables";
+
 .search-panel {
   position: absolute;
   top: 0;
@@ -6,8 +8,8 @@
   height: 60px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  background-color: #e6e6e6;
+  padding: 0 $base-padding;
+  background-color: $color-extra-light-gray;
   z-index: 70;
 
   .search-panel__search-field {

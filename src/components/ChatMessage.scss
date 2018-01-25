@@ -19,14 +19,14 @@
     background-color: #f8f8f8;
     border: 1px solid $border-color;
     border-radius: 10px 10px 10px 0;
-    font-size: 18px;
-    line-height: 23px;
+    font-size: $font-size-medium;
+    line-height: 1.27777;
   }
 
   .chat-message__date {
     display: inline-block;
     margin-left: auto;
-    font-size: 14px;
+    font-size: $font-size-small;
     color: $text-color-muted;
     text-transform: uppercase;
   }

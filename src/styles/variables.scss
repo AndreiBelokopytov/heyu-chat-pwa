@@ -1,8 +1,32 @@
 $color-primary: #eb402c;
 $color-accent: #d90647;
+$color-extra-light-gray: #e6e6e6;
+$color-light-gray: #e0e0e0;
+$color-gray: #b9b9b9;
+$color-black: #363636;
 
-$page-background-color: #fff;
-$border-color: #e0e0e0;
-$text-color-muted: #b9b9b9;
+$border-color: $color-light-gray;
+$text-color-default: $color-black;
+$text-color-muted: $color-gray;
 
-$base-line-height: 1.4;
+$font-size-x-small: 12px;
+$font-size-small: 14px;
+$font-size-default: 16px;
+$font-size-medium: 18px;
+$font-size-large: 19px;
+$font-size-x-large: 60px;
+
+$font-weight-default: 400;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+$base-padding: 16px;
+
+$base-border-radius: 21px;
+$button-border-radius: $base-border-radius;
+$input-border-radius: $base-border-radius;
+
+$input-height: 42px;
+$button-height: $input-height;
+
+$gradient-primary: linear-gradient(to top, #eb402c 0%, #d90647 100%);

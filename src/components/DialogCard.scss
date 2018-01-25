@@ -1,5 +1,4 @@
 @import "../styles/variables";
-@import "../styles/mixins";
 
 .dialog-card__avatar {
   width: 50px;
@@ -14,16 +13,16 @@
 }
 
 .dialog-card__user-name {
-  font-size: 16px;
+  font-size: $font-size-default;
 }
 
 .dialog-card__user-status {
-  font-size: 12px;
+  font-size: $font-size-small;
   color: $text-color-muted;
 }
 
 .dialog-card__user-last-seen {
-  font-size: 14px;
+  font-size: $font-size-small;
   color: $text-color-muted;
 }
 
@@ -31,5 +30,5 @@
   display: flex;
   align-items: center;
   height: 68px;
-  @include padding('horizontal');
+  padding: $base-padding;
 }

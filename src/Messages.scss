@@ -1,5 +1,4 @@
 @import "./styles/variables";
-@import "./styles/mixins";
 
 .messages-page {
   height: 100%;
@@ -15,11 +14,11 @@
   height: 100%;
   background-color: #fff;
   overflow: auto;
-  @include padding('vertical');
+  padding: $base-padding 0;
 }
 
 .chat__message {
-  @include padding('horizontal');
+  padding: 0 $base-padding;
 
   + .chat__message {
     margin-top: 25px;
@@ -28,14 +27,21 @@
 
 .messages-page__msg-field{
   flex: 1;
-  @include padding();
+  padding: $base-padding;
 }
 
 .messages-page__btn-send {
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   color: #fff;
   width: 70px;
-  @include background-gradient();
+  background-image: $gradient-primary;
+
+  &:focus, &:active {
+    outline: none;
+  }
 }
