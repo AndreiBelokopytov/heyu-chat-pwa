@@ -3,20 +3,16 @@
 .home-page {
   color: #fff;
   text-align: center;
+  height: 100%;
 }
 
 .home-page__content {
   height: 100%;
-  overflow: hidden;
-  padding: 120px 52px 0 52px;
+  padding: 80px 48px 0 48px;
   transition: all .2s ease-out .2s;
   &.scrolled {
-    transform: translate3d(0, -254px, 0);
+    transform: translate3d(0, -200px, 0);
   }
-}
-
-.home-page__header {
-  margin-bottom: 100px;
 }
 
 .home-page__title {
@@ -25,16 +21,46 @@
 }
 
 .home-page__subtitle {
+  margin-top: 10px;
   font-size: $font-size-large;
 }
 
 .home-page__form {
+  position: relative;
   max-width: 320px;
-  margin: 0 auto;
+  margin: 50px auto 0 auto;
 }
 
-.home-page__buttons {
-  margin-top: 50px;
+.home-page__fieldset {
+  margin-bottom: 50px;
+}
+
+.home-page__signin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.home-page__signup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+}
+
+.home-page__brand-icon {
+  margin-right: 10px;
+}
+
+.home-page__back-icon {
+  font-size: $font-size-default !important;
+  margin-right: 10px;
+}
+
+.home-page__button + .home-page__button {
+  margin-top: 25px;
 }
 
 .input-field + .input-field {
