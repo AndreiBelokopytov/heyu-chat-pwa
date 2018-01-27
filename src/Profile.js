@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Page as OnsPage,
   List as OnsList,
@@ -6,27 +7,28 @@ import {
   Switch as OnsSwitch
 } from 'react-onsenui';
 import UserAvatar from './components/UserAvatar';
-import mock from './mocks/profile';
 import './Profile.scss';
 
 export default class Profile extends Component {
   state = {
-    profile: mock
+    enableNotifications: true
   };
 
   renderHeader = () => {
+    const {
+      displayName,
+      photoURL
+    } = this.props.firebase.auth().currentUser;
     return (
       <div className='profile-page__header'>
         <div className='user-profile'>
           <div className='user-profile__content'>
             <UserAvatar
               className='user-profile__avatar'
-              src={this.state.profile.avatarUrl}
+              src={photoURL}
             />
-            <h1 className='user-profile__name'>{this.state.profile.fullName}</h1>
-            <p className='user-profile__about'>
-              {this.state.profile.about}
-            </p>
+            <h1 className='user-profile__name'>{displayName}</h1>
+            <p className='user-profile__about' />
           </div>
         </div>
       </div>
@@ -37,6 +39,11 @@ export default class Profile extends Component {
     const contentStyle = {
       top: 265
     };
+    const {
+      email,
+      phoneNumber
+    } = this.props.firebase.auth().currentUser;
+
     return (
       <OnsPage
         contentStyle={contentStyle}
@@ -55,7 +62,7 @@ export default class Profile extends Component {
                   Email Address
                 </span>
                 <span className='right label'>
-                  {this.state.profile.email}
+                  {email}
                 </span>
               </OnsListItem>
               <OnsListItem
@@ -66,7 +73,7 @@ export default class Profile extends Component {
                   Telephone
                 </span>
                 <span className='right label'>
-                  {this.state.profile.phone}
+                  {phoneNumber}
                 </span>
               </OnsListItem>
               <OnsListItem
@@ -77,7 +84,7 @@ export default class Profile extends Component {
                 </span>
                 <span className='right label'>
                   <OnsSwitch
-                    checked={this.state.profile.enableNotifications}
+                    checked={this.state.enableNotifications}
                   />
                 </span>
               </OnsListItem>
@@ -113,3 +120,8 @@ export default class Profile extends Component {
     );
   }
 }
+
+Profile.propTypes = {
+  navigator: PropTypes.object.isRequired,
+  firebase: PropTypes.object.isRequired
+};

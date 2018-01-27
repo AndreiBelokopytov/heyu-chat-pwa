@@ -25,6 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.5",
+    "firebase": "^4.9.0",
     "onsenui": "^2.8.3",
     "react": "^16.2.0",
     "react-chatview": "^0.2.5",

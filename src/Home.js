@@ -6,13 +6,15 @@ import {
   Page as OnsPage,
   Icon as OnsIcon,
   Input as OnsInput,
-  Button as OnsButton
+  Button as OnsButton,
+  Toast as OnsToast
 } from 'react-onsenui';
 import IconFacebook from './icons/IconFacebook';
 import IconGoogle from './icons/IconGoogle';
 import Link from './components/Link';
 import Protected from './Protected';
 import './Home.scss';
+import firebase from 'firebase';
 
 const slideOut = el => {
   return ons.animit(el)
@@ -58,18 +60,22 @@ class Home extends Component {
   state = {
     isAndroid: ons.platform.isAndroid(),
     keyboardOpen: false,
-    authData: {}
+    authData: {},
+    errorMessage: ''
   };
 
-  handleLoginClick = () => {
-    const {login, password} = this.state.authData;
-    if (!login || !password) return;
+  loginSuccess = () => {
     this.props.navigator.pushPage({
       component: Protected,
       props: {
         key: 'protected'
       }
     });
+  }
+
+  handleLoginClick = () => {
+    const {login, password} = this.state.authData;
+    if (!login || !password) return;
   };
 
   showSignUpForm = () => {
@@ -107,6 +113,26 @@ class Home extends Component {
         })
       });
     }
+  }
+
+  signInWithGoogle = () => {
+    const {firebase} = this.props;
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider).then(result => {
+      this.loginSuccess();
+    }).catch(error => {
+      this.setState({
+        errorMessage: error.message
+      });
+    });
+  };
+
+  handleDismiss = () => {
+    this.setState({
+      errorMessage: ''
+    });
   }
 
   render () {
@@ -152,6 +178,7 @@ class Home extends Component {
                 <div className='home-page__button'>
                   <OnsButton
                     modifier='white large'
+                    onClick={this.signInWithGoogle}
                   >
                     <IconGoogle className='home-page__brand-icon' />
                     Sign in with Google
@@ -211,13 +238,23 @@ class Home extends Component {
             </form>
           </div>
         </div>
+
+        <OnsToast isOpen={!!this.state.errorMessage}>
+          <div className='home-page__error-message'>
+            {this.state.errorMessage}
+          </div>
+          <button onClick={this.handleDismiss}>
+            Dismiss
+          </button>
+        </OnsToast>
       </OnsPage>
     );
   }
 }
 
 Home.propTypes = {
-  navigator: PropTypes.object.isRequired
+  navigator: PropTypes.object.isRequired,
+  firebase: PropTypes.object.isRequired
 };
 
 export default Home;

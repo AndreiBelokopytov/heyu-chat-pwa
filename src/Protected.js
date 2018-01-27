@@ -37,12 +37,17 @@ export default class Protected extends Component {
   };
 
   renderTabs = () => {
+    const tabProps = {
+      navigator: this.props.navigator,
+      firebase: this.props.firebase
+    };
+
     return [
       {
         content: (
           <Dialogs
             key='dialogs'
-            navigator={this.props.navigator}
+            {...tabProps}
           />
         ),
         tab: (
@@ -57,7 +62,7 @@ export default class Protected extends Component {
         content: (
           <Groups
             key='groups'
-            navigator={this.props.navigator}
+            {...tabProps}
           />
         ),
         tab: (
@@ -69,7 +74,12 @@ export default class Protected extends Component {
         )
       },
       {
-        content: <Contacts key='contacts' />,
+        content: (
+          <Contacts
+            key='contacts'
+            {...tabProps}
+          />
+        ),
         tab: (
           <OnsTab
             key='contacts-tab'
@@ -79,7 +89,12 @@ export default class Protected extends Component {
         )
       },
       {
-        content: <Profile key='profile' />,
+        content: (
+          <Profile
+            key='profile'
+            {...tabProps}
+          />
+        ),
         tab: (
           <OnsTab
             key='profile-tab'
@@ -115,5 +130,6 @@ export default class Protected extends Component {
 }
 
 Protected.propTypes = {
-  navigator: PropTypes.object.isRequired
+  navigator: PropTypes.object.isRequired,
+  firebase: PropTypes.object.isRequired
 };
