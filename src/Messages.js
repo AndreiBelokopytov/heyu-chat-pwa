@@ -93,7 +93,7 @@ export default class Messages extends Component {
     this.setState({
       message: evt.target.value
     });
-  }
+  };
 
   handleMessageSubmit = () => {
     if (!this.state.message) {
@@ -109,7 +109,7 @@ export default class Messages extends Component {
       }, ...this.state.messages],
       message: ''
     });
-  }
+  };
 
   componentWillMount () {
     this.loadMoreHistory();

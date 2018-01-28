@@ -21,7 +21,7 @@ function UserAvatar ({
       className={avatarClass}
       style={avatarStyle}
       {...other}
-     />
+    />
   );
 }
 

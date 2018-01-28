@@ -38,8 +38,7 @@ export default class Protected extends Component {
 
   renderTabs = () => {
     const tabProps = {
-      navigator: this.props.navigator,
-      firebase: this.props.firebase
+      navigator: this.props.navigator
     };
 
     return [
@@ -130,6 +129,5 @@ export default class Protected extends Component {
 }
 
 Protected.propTypes = {
-  navigator: PropTypes.object.isRequired,
-  firebase: PropTypes.object.isRequired
+  navigator: PropTypes.object.isRequired
 };

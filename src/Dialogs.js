@@ -21,7 +21,7 @@ export default class Dialogs extends Component {
         key: 'messages'
       }
     });
-  }
+  };
 
   renderRow = index => {
     const item = this.state.dialogs[index];

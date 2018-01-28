@@ -13,8 +13,8 @@ import IconFacebook from './icons/IconFacebook';
 import IconGoogle from './icons/IconGoogle';
 import Link from './components/Link';
 import Protected from './Protected';
+import firebaseProvider from './firebaseProvider';
 import './Home.scss';
-import firebase from 'firebase';
 
 const slideOut = el => {
   return ons.animit(el)
@@ -53,9 +53,9 @@ class Home extends Component {
   signInForm = null;
   signUpForm = null;
 
-  setSignInForm = el => this.signInForm = el;
+  setSignInForm = el => (this.signInForm = el);
 
-  setSignUpForm = el => this.signUpForm = el;
+  setSignUpForm = el => (this.signUpForm = el);
 
   state = {
     isAndroid: ons.platform.isAndroid(),
@@ -71,7 +71,7 @@ class Home extends Component {
         key: 'protected'
       }
     });
-  }
+  };
 
   handleLoginClick = () => {
     const {login, password} = this.state.authData;
@@ -102,7 +102,7 @@ class Home extends Component {
         keyboardOpen: false
       });
     }
-  }
+  };
 
   handleInputChange = evt => {
     const {value, name} = evt.target;
@@ -113,14 +113,20 @@ class Home extends Component {
         })
       });
     }
-  }
+  };
 
   signInWithGoogle = () => {
-    const {firebase} = this.props;
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    firebase.auth().signInWithPopup(provider).then(result => {
+    firebaseProvider.signInWithGoogle().then(() => {
+      this.loginSuccess();
+    }).catch(error => {
+      this.setState({
+        errorMessage: error.message
+      });
+    });
+  };
+
+  signInWithFacebook = () => {
+    firebaseProvider.signInWithFacebook().then(() => {
       this.loginSuccess();
     }).catch(error => {
       this.setState({
@@ -133,7 +139,7 @@ class Home extends Component {
     this.setState({
       errorMessage: ''
     });
-  }
+  };
 
   render () {
     const {
@@ -169,7 +175,7 @@ class Home extends Component {
                 <div className='home-page__button'>
                   <OnsButton
                     modifier='white large'
-                    onClick={this.handleLoginClick}
+                    onClick={this.signInWithFacebook}
                   >
                     <IconFacebook className='home-page__brand-icon' />
                     Sign in with Facebook
@@ -253,8 +259,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  navigator: PropTypes.object.isRequired,
-  firebase: PropTypes.object.isRequired
+  navigator: PropTypes.object.isRequired
 };
 
 export default Home;

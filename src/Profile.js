@@ -7,6 +7,7 @@ import {
   Switch as OnsSwitch
 } from 'react-onsenui';
 import UserAvatar from './components/UserAvatar';
+import firebaseProvider from './firebaseProvider';
 import './Profile.scss';
 
 export default class Profile extends Component {
@@ -15,34 +16,28 @@ export default class Profile extends Component {
   };
 
   renderHeader = () => {
-    const {
-      displayName,
-      photoURL
-    } = this.props.firebase.auth().currentUser;
+    const profile = firebaseProvider.getProfile();
     return (
       <div className='profile-page__header'>
         <div className='user-profile'>
           <div className='user-profile__content'>
             <UserAvatar
               className='user-profile__avatar'
-              src={photoURL}
+              src={profile.photoURL}
             />
-            <h1 className='user-profile__name'>{displayName}</h1>
+            <h1 className='user-profile__name'>{profile.displayName}</h1>
             <p className='user-profile__about' />
           </div>
         </div>
       </div>
     );
-  }
+  };
 
   render () {
     const contentStyle = {
       top: 265
     };
-    const {
-      email,
-      phoneNumber
-    } = this.props.firebase.auth().currentUser;
+    const profile = firebaseProvider.getProfile();
 
     return (
       <OnsPage
@@ -62,7 +57,7 @@ export default class Profile extends Component {
                   Email Address
                 </span>
                 <span className='right label'>
-                  {email}
+                  {profile.email}
                 </span>
               </OnsListItem>
               <OnsListItem
@@ -73,7 +68,7 @@ export default class Profile extends Component {
                   Telephone
                 </span>
                 <span className='right label'>
-                  {phoneNumber}
+                  {profile.phoneNumber}
                 </span>
               </OnsListItem>
               <OnsListItem
@@ -122,6 +117,5 @@ export default class Profile extends Component {
 }
 
 Profile.propTypes = {
-  navigator: PropTypes.object.isRequired,
-  firebase: PropTypes.object.isRequired
+  navigator: PropTypes.object.isRequired
 };

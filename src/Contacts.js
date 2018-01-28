@@ -23,7 +23,7 @@ export default class Contacts extends Component {
         user={item}
       />
     );
-  }
+  };
 
   renderSearchbar = () => {
     return (
@@ -35,7 +35,7 @@ export default class Contacts extends Component {
         />
       </div>
     );
-  }
+  };
 
   componentDidMount () {
     new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ export default class Contacts extends Component {
         filter: searchStr
       });
     }
-  }
+  };
 
   render () {
     return (
