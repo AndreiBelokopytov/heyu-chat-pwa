@@ -21,10 +21,10 @@ function UserCard ({
       <div className='user-avatar-wrap left'>
         <Avatar
           className='user-avatar'
-          src={user.avatarUrl}
+          src={user.photoURL}
         />
       </div>
-      <div className='user-name center'>{user.fullName}</div>
+      <div className='user-name center'>{user.displayName}</div>
       <div className='right'>
         <OnsIcon
           className='contact-icon'
@@ -37,8 +37,8 @@ function UserCard ({
 
 UserCard.propTypes = {
   user: PropTypes.shape({
-    avatarUrl: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired
+    photoURL: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired
   }).isRequired,
   className: PropTypes.string
 };

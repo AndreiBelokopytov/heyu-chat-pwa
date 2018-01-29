@@ -5,9 +5,8 @@ import {
   SearchInput as OnsSearchInput
 } from 'react-onsenui';
 import UserCard from './components/UserCard';
-import mock from './mocks/users.json';
 import './Contacts.scss';
-import { setTimeout } from 'timers';
+import firebaseProvider from './firebaseProvider';
 
 export default class Contacts extends Component {
   state = {
@@ -15,14 +14,16 @@ export default class Contacts extends Component {
     contacts: []
   };
 
-  renderRow = index => {
-    const item = this.state.contacts[index];
-    return (
-      <UserCard
-        key={item.id}
-        user={item}
-      />
-    );
+  renderRow = contacts => {
+    return function (index) {
+      const item = contacts[index];
+      return (
+        <UserCard
+          key={item.key}
+          user={item}
+        />
+      );
+    };
   };
 
   renderSearchbar = () => {
@@ -37,35 +38,43 @@ export default class Contacts extends Component {
     );
   };
 
-  componentDidMount () {
-    new Promise((resolve, reject) => {
-      setTimeout(
-        () => resolve(mock),
-        100
-      );
-    }).then(contacts => this.setState({contacts}));
-  }
-
   handleSearchChange = evt => {
     const searchStr = evt.target.value;
     if (searchStr === this.state.filter) {
       return;
     }
-    if (!searchStr) {
-      this.setState({
-        contacts: mock,
-        filter: searchStr
-      });
-    } else {
-      this.setState({
-        contacts: this.state.contacts
-          .filter(user => user.fullName.startsWith(searchStr)),
-        filter: searchStr
-      });
-    }
+    this.setState({
+      filter: searchStr
+    });
   };
 
+  componentWillMount () {
+    firebaseProvider.getUsersRef().on('value', snapshot => {
+      if (!snapshot) {
+        return;
+      }
+      const data = snapshot.val();
+      const contacts = Object.values(data);
+      const keys = Object.keys(data);
+      this.setState({
+        contacts: contacts.map((item, index) => {
+          item['key'] = keys[index];
+          return item;
+        })
+      });
+    });
+  }
+
   render () {
+    let contacts = [];
+
+    if (!this.state.filter) {
+      contacts = this.state.contacts;
+    } else {
+      contacts = this.state.contacts
+        .filter(user => user.displayName.startsWith(this.state.filter));
+    }
+
     return (
       <OnsPage
         renderFixed={this.renderSearchbar}
@@ -76,8 +85,8 @@ export default class Contacts extends Component {
             <OnsLazyList
               modifier='noborder'
               className='contacts-list'
-              length={this.state.contacts.length}
-              renderRow={this.renderRow}
+              length={contacts.length}
+              renderRow={this.renderRow(contacts)}
               calculateItemHeight={() => 42}
             />
           </div>
