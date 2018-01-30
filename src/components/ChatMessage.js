@@ -5,10 +5,12 @@ import './ChatMessage.scss';
 
 const propTypes = {
   message: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    author: PropTypes.shape({
+      photoURL: PropTypes.string.isRequired,
+      displayName: PropTypes.string.isRequired
+    }),
+    key: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
     sentDate: PropTypes.string.isRequired
   }).isRequired
 };
@@ -20,9 +22,9 @@ function ChatMessage ({
     <div className='chat-message'>
       <UserAvatar
         className='chat-message__autor-avatar'
-        src={message.avatarUrl}
+        src={message.author.photoURL}
       />
-      <div className='chat-message__text'>{message.text}</div>
+      <div className='chat-message__text'>{message.message}</div>
       <div className='chat-message__date'>{message.sentDate}</div>
     </div>
   );

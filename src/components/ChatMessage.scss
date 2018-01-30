@@ -9,6 +9,7 @@
     width: 24px;
     height: 24px;
     align-self: flex-end;
+    flex-shrink: 0;
   }
 
   .chat-message__text {

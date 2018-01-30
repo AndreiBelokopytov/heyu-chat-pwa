@@ -13,8 +13,8 @@ import ReactChatView from 'react-chatview';
 import ChatMessage from './components/ChatMessage';
 import Textarea from './components/Textarea';
 import messagesMock from './mocks/messages.json';
-import profileMock from './mocks/profile.js';
 import './Messages.scss';
+import firebaseProvider from './firebaseProvider';
 
 const PIECE_LENGTH = 20;
 
@@ -99,26 +99,46 @@ export default class Messages extends Component {
     if (!this.state.message) {
       return;
     }
+    const profile = firebaseProvider.getProfile();
+    const messageRef = firebaseProvider.getMessagesRef(uuid.create().toString());
+    messageRef.set({
+      author: {
+        displayName: profile.displayName,
+        photoURL: profile.photoURL
+      },
+      message: this.state.message,
+      sentDate: (new Date()).toUTCString()
+    });
     this.setState({
-      messages: [{
-        id: uuid.create().toString(),
-        fullName: profileMock.fullName,
-        text: this.state.message,
-        sentDate: (new Date()).toLocaleTimeString('en-US'),
-        avatarUrl: profileMock.avatarUrl
-      }, ...this.state.messages],
       message: ''
     });
   };
 
   componentWillMount () {
-    this.loadMoreHistory();
+    firebaseProvider.getMessagesRef().on('value', snapshot => {
+      if (!snapshot) {
+        return;
+      }
+      const data = snapshot.val();
+      if (!data) {
+        return;
+      }
+      const messages = Object.values(data);
+      const keys = Object.keys(data);
+      this.setState({
+        messages: messages.map((item, index) => {
+          item['key'] = keys[index];
+          return item;
+        })
+      });
+    });
+    // this.loadMoreHistory();
   }
 
   render () {
     const messages = this.state.messages.map(item => (
       <div
-        key={item.id}
+        key={item.key}
         className='chat__message'
       >
         <ChatMessage message={item} />

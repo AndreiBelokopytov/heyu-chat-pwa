@@ -58,5 +58,12 @@ export default {
     } else {
       return ref.orderByChild('title');
     }
+  },
+  getMessagesRef: function (key) {
+    if (key) {
+      return firebase.database().ref(`messages/${key}`);
+    } else {
+      return firebase.database().ref('messages').orderByChild('sentDate');
+    }
   }
 };
