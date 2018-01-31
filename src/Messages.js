@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid-js';
+import moment from 'moment';
 import {
   Toolbar as OnsToolbar,
   BottomToolbar as OnsBottomToolbar,
@@ -107,14 +108,14 @@ export default class Messages extends Component {
         photoURL: profile.photoURL
       },
       message: this.state.message,
-      sentDate: (new Date()).toUTCString()
+      sentDate: (new Date()).getTime()
     });
     this.setState({
       message: ''
     });
   };
 
-  componentWillMount () {
+  componentDidMount () {
     firebaseProvider.getMessagesRef().on('value', snapshot => {
       if (!snapshot) {
         return;
@@ -128,6 +129,7 @@ export default class Messages extends Component {
       this.setState({
         messages: messages.map((item, index) => {
           item['key'] = keys[index];
+          item['sentDate'] = moment(item.sentDate).format('ddd, hA');
           return item;
         })
       });
