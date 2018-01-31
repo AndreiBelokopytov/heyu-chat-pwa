@@ -13,7 +13,6 @@ import {
 import ReactChatView from 'react-chatview';
 import ChatMessage from './components/ChatMessage';
 import Textarea from './components/Textarea';
-import messagesMock from './mocks/messages.json';
 import './Messages.scss';
 import firebaseProvider from './firebaseProvider';
 
